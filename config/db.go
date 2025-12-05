@@ -2,7 +2,6 @@ package config
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"os"
 
@@ -13,46 +12,59 @@ import (
 var DB *sql.DB
 
 func InitDB() {
-	// Contoh pakai env (sesuaikan sama Railway lu)
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-	dbUser := os.Getenv("DB_USER")
-	dbPass := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
-	sslMode := os.Getenv("DB_SSLMODE") // biasanya "disable" di lokal
+	// PRIORITY: use DATABASE_URL if exists (Railway ready)
+	dsn := os.Getenv("DATABASE_URL")
 
-	if dbPort == "" {
-		dbPort = "5432"
-	}
-	if sslMode == "" {
-		sslMode = "disable"
-	}
+	// fallback ke DB manual mode
+	if dsn == "" {
+		dbHost := os.Getenv("DB_HOST")
+		dbPort := os.Getenv("DB_PORT")
+		dbUser := os.Getenv("DB_USER")
+		dbPass := os.Getenv("DB_PASSWORD")
+		dbName := os.Getenv("DB_NAME")
+		sslMode := os.Getenv("DB_SSLMODE")
 
-	dsn := fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-		dbHost, dbPort, dbUser, dbPass, dbName, sslMode,
-	)
+		if dbPort == "" {
+			dbPort = "5432"
+		}
+		if sslMode == "" {
+			sslMode = "disable"
+		}
+
+		dsn = "postgres://" + dbUser + ":" + dbPass +
+			"@" + dbHost + ":" + dbPort +
+			"/" + dbName + "?sslmode=" + sslMode
+	}
 
 	var err error
 	DB, err = sql.Open("postgres", dsn)
 	if err != nil {
-		log.Fatal("failed to open DB:", err)
+		log.Fatal("❌ Failed open DB:", err)
 	}
 
 	if err = DB.Ping(); err != nil {
-		log.Fatal("failed to ping DB:", err)
+		log.Fatal("❌ Failed ping DB:", err)
 	}
 
-	log.Println("DB connected")
+	log.Println("🟢 DB connected!")
 
-	// Jalankan migration
+	autoMigrate()
+}
+
+func autoMigrate() {
 	migrations := &migrate.FileMigrationSource{
-		Dir: "migrations",
+		Dir: "migrations", // folder migrations wajib ada
 	}
 
+	// Always run UP migrations
 	n, err := migrate.Exec(DB, "postgres", migrations, migrate.Up)
 	if err != nil {
-		log.Fatal("failed to run migrations:", err)
+		log.Fatal("❌ Migration failed:", err)
 	}
-	log.Printf("Applied %d migrations\n", n)
+
+	if n > 0 {
+		log.Printf("🚀 %d new migrations applied!\n", n)
+	} else {
+		log.Println("👌 No new migrations, already up to date.")
+	}
 }
