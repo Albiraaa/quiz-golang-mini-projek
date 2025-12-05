@@ -19,7 +19,7 @@ func main() {
 
 	// Health check simple
 	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Golang Book API"})
+		c.JSON(200, gin.H{"message": "Golang System Book API"})
 	})
 
 	// Auth routes (tidak pakai JWT middleware)
