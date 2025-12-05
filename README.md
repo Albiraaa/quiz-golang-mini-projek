@@ -23,7 +23,51 @@ API ini dibuat sesuai ketentuan brief:
 
 ---
 
-## 2. Struktur Folder
+
+## 2. CRUD Postman
+
+Menggunakan postman untuk melakukan CRUD 
+
+Sistem sudah dideploy di railway
+
+(https://quiz-golang-mini-projek-production.up.railway.app/api/buku)
+catatan penting membutuhkan token Bearer Authorization untuk mengakses
+Body Post Buku
+    {
+  "title": "",
+  "description": "",
+  "image_url": "",
+  "release_year": ,
+  "price": ,
+  "total_page": ,
+  "category_id": 
+}
+
+(https://quiz-golang-mini-projek-production.up.railway.app/api/kategori)
+catatan penting membutuhkan token Bearer Authorization untuk mengakses
+Body Post Kategori
+{
+  "name": ""
+}
+
+(https://quiz-golang-mini-projek-production.up.railway.app/api/users/login)
+Ketika sudah login maka akan diberikan token
+jika menggunakan postman harap di inputkan di menu Authorization (Bearer Token)
+jika di web maka harus diinputkan manual melalui js
+(https://quiz-golang-mini-projek-production.up.railway.app/api/users/register)
+Body Post register and login
+{
+  "username": "",
+  "password": ""
+}
+
+==========================
+
+Untuk Get sama semua (membutuhkan token juga)
+https://quiz-golang-mini-projek-production.up.railway.app/api/kategori
+https://quiz-golang-mini-projek-production.up.railway.app/api/buku
+
+## 3. Struktur Folder
 
 Kurang lebih seperti ini:
 
