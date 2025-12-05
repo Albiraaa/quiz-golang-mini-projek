@@ -61,13 +61,30 @@ Body Post register and login
   "password": ""
 }
 
-==========================
-
 Untuk Get sama semua (membutuhkan token juga)
 https://quiz-golang-mini-projek-production.up.railway.app/api/kategori
 https://quiz-golang-mini-projek-production.up.railway.app/api/buku
 
-## 3. Struktur Folder
+===========================
+
+## 3. Cara melalui WEB
+bisa buka file test.html yang sudah saya buat isinya adalah html sederhana dengan sedikit js
+
+untuk base url api bisa dibiarkan otomatis atau jika tidak ada bisa menambahkan:
+https://quiz-golang-mini-projek-production.up.railway.app
+
+lanjut ke form login masukin aja ini
+admin   :user
+123456  :password
+
+token akan otomatis tersimpan 
+
+jika ingin register bisa melakukannya di postman ada di penjelasan sebelumnya
+
+selanjutnya form get untuk melihat semua buku dan kategori
+serta get from ID 
+
+## 4. Struktur Folder
 
 Kurang lebih seperti ini:
 
@@ -89,4 +106,6 @@ quiz-golang-books/
 │   └── book_handler.go
 └── migrations/
     └── 001_init.sql
+└── test.html 
+
 

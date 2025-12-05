@@ -219,7 +219,7 @@
   // ====== BOOKS ======
 
   function getBooks() {
-    fetchWithAuth("/api/books");
+    fetchWithAuth("/api/buku");
   }
 
   function getBookById() {
@@ -228,13 +228,13 @@
       alert("Isi ID buku dulu");
       return;
     }
-    fetchWithAuth("/api/books/" + id);
+    fetchWithAuth("/api/buku/" + id);
   }
 
   // ====== CATEGORIES ======
 
   function getCategories() {
-    fetchWithAuth("/api/categories");
+    fetchWithAuth("/api/kategori");
   }
 
   function getCategoryById() {
@@ -243,7 +243,7 @@
       alert("Isi ID kategori dulu");
       return;
     }
-    fetchWithAuth("/api/categories/" + id);
+    fetchWithAuth("/api/kategori/" + id);
   }
 </script>
 </body>
