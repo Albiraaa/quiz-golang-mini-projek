@@ -34,19 +34,19 @@ func main() {
 	protected.Use(middleware.JWTAuthMiddleware())
 	{
 		// categories
-		protected.GET("/categories", handlers.GetCategories)
-		protected.POST("/categories", handlers.CreateCategory)
-		protected.GET("/categories/:id", handlers.GetCategoryByID)
-		protected.PUT("/categories/:id", handlers.UpdateCategory)
-		protected.DELETE("/categories/:id", handlers.DeleteCategory)
-		protected.GET("/categories/:id/books", handlers.GetBooksByCategory)
+		protected.GET("/kategori", handlers.GetCategories)
+		protected.POST("/kategori", handlers.CreateCategory)
+		protected.GET("/kategori/:id", handlers.GetCategoryByID)
+		protected.PUT("/kategori/:id", handlers.UpdateCategory)
+		protected.DELETE("/kategori/:id", handlers.DeleteCategory)
+		protected.GET("/kategori/:id/books", handlers.GetBooksByCategory)
 
 		// books
-		protected.GET("/books", handlers.GetBooks)
-		protected.POST("/books", handlers.CreateBook)
-		protected.GET("/books/:id", handlers.GetBookByID)
-		protected.PUT("/books/:id", handlers.UpdateBook)
-		protected.DELETE("/books/:id", handlers.DeleteBook)
+		protected.GET("/buku", handlers.GetBooks)
+		protected.POST("/buku", handlers.CreateBook)
+		protected.GET("/buku/:id", handlers.GetBookByID)
+		protected.PUT("/buku/:id", handlers.UpdateBook)
+		protected.DELETE("/buku/:id", handlers.DeleteBook)
 	}
 
 	port := os.Getenv("PORT")
